@@ -28,3 +28,6 @@ Clone the Repository
      
 **it has some features also that are going to be added but most of it are finished 
 and it needs some improvement in the responsiveness too.
+**You can login with this email : edl@gmail.com  and with this password: 123
+
+## If the installation process is not working for you, please contact me at 0963152637 for further documentation.
