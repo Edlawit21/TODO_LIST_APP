@@ -21,5 +21,9 @@ Clone the Repository
           php artisan migrate --seed
      
      php artisan serve
+
+
+   ** and also it will direct you to the home page when register but logout and
+     again login so that your token be saved and you can add your tasks 
      
 
