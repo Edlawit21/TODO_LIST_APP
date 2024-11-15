@@ -1,4 +1,5 @@
 import { Form, Input } from "antd";
+import PropTypes from "prop-types";
 
 const Login = ({ formData, handleInputChange }) => {
   return (
@@ -52,6 +53,14 @@ const Login = ({ formData, handleInputChange }) => {
       </Form>
     </div>
   );
+};
+
+Login.propTypes = {
+  formData: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }).isRequired,
+  handleInputChange: PropTypes.func.isRequired,
 };
 
 export default Login;

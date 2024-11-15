@@ -17,10 +17,10 @@ class TodoController extends Controller
     }
 
     // Add a new todo's
-   // Store a new todo
+ 
 public function store(Request $request)
 {
-    // Custom validation messages
+
     $messages = [
         'title.required' => 'The title field is required.',
         'title.max' => 'The title must not exceed 255 characters.',
@@ -28,7 +28,7 @@ public function store(Request $request)
         'is_important.boolean' => 'The importance field must be a boolean.',
     ];
 
-    // Validate the request with custom error messages
+    
     $fields = $request->validate([
         'title' => 'required|string|max:255',
         'description' => 'nullable|string',
@@ -38,12 +38,12 @@ public function store(Request $request)
 
     $user = auth()->user();
 
-    // Using the relationship to create a new todo
+   
     $todo = $user->todos()->create([
         'title' => $fields['title'],
         'description' => $fields['description'],
         'status' => $fields['status'] ?? 'pending',
-        'is_important' => $fields['is_important'] ?? false, // Defaulting to false if not provided
+        'is_important' => $fields['is_important'] ?? false, 
     ]);
 
     return response()->json($todo, 201);
@@ -51,7 +51,6 @@ public function store(Request $request)
 
 
 // Update an existing todo
-// In your TodoController
 public function update(Request $request, $id)
 {
     $todo = Todo::find($id);

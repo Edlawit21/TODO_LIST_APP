@@ -8,15 +8,13 @@ const { Search } = Input;
 const Header = () => {
   const navigate = useNavigate(); // Initialize navigate
 
-  // Handle search
   const onSearch = (value, _e, info) => console.log(info?.source, value);
 
-  // Handle logout
   const handleLogout = async () => {
     try {
-      await logout(); // Call the logout API
+      await logout();
       message.success("Logged out successfully!");
-      navigate("/"); // Redirect to AuthPage
+      navigate("/");
     } catch (error) {
       console.error("Logout error:", error);
       message.error("Failed to logout. Please try again.");

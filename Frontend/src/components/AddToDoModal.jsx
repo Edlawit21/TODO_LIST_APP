@@ -2,43 +2,39 @@ import { Modal, Input, Button, Form, Divider, Select } from "antd";
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import TextArea from "antd/es/input/TextArea";
-import { addTodo, updateTodo } from "../api/api"; // Import the API functions
+import { addTodo, updateTodo } from "../api/api";
 
 const { Option } = Select;
 
 const AddToDoModal = ({ initialValues, onClose, onSubmit, visible }) => {
   const [form] = Form.useForm();
 
-  // Handle the form submission to update or add the task
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
       if (initialValues) {
-        // If initialValues exists, we are updating the task
-        await updateTodo(initialValues.id, values); // Update API call
-        onSubmit({ ...initialValues, ...values }); // Merge updated values with initialValues
+        await updateTodo(initialValues.id, values);
+        onSubmit({ ...initialValues, ...values });
       } else {
-        // If no initialValues, it's a new task
-        await addTodo(values); // Add API call
-        onSubmit(values); // Send newly added task to the parent component
+        await addTodo(values);
+        onSubmit(values);
       }
-      onClose(); // Close the modal after submit
+      onClose();
     } catch (error) {
       console.log("Validation failed:", error);
     }
   };
 
   const handleCancel = () => {
-    onClose(); // Close the modal without saving
+    onClose();
   };
 
-  // Reset form when modal is opened or initialValues change
   useEffect(() => {
     if (visible) {
-      form.resetFields(); // Reset the form when modal is visible
+      form.resetFields();
     }
     if (initialValues) {
-      form.setFieldsValue(initialValues); // Prefill form if initialValues is provided (for editing)
+      form.setFieldsValue(initialValues);
     }
   }, [initialValues, visible, form]);
 
@@ -56,7 +52,6 @@ const AddToDoModal = ({ initialValues, onClose, onSubmit, visible }) => {
         <h2 className="mb-4">{initialValues ? "Edit " : "Add "} ToDo</h2>
         <Divider />
         <Form form={form} requiredMark={false}>
-          {/* Task Title */}
           <Form.Item
             label="Title"
             name="title"
@@ -65,7 +60,6 @@ const AddToDoModal = ({ initialValues, onClose, onSubmit, visible }) => {
             <Input allowClear />
           </Form.Item>
 
-          {/* Task Description */}
           <Form.Item
             label="Description"
             name="description"
@@ -76,7 +70,6 @@ const AddToDoModal = ({ initialValues, onClose, onSubmit, visible }) => {
             <TextArea allowClear />
           </Form.Item>
 
-          {/* Task Status */}
           <Form.Item
             label="Status"
             name="status"
@@ -95,7 +88,7 @@ const AddToDoModal = ({ initialValues, onClose, onSubmit, visible }) => {
 
 AddToDoModal.propTypes = {
   initialValues: PropTypes.shape({
-    id: PropTypes.string, // Make sure the id is passed for editing tasks
+    id: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     status: PropTypes.string,

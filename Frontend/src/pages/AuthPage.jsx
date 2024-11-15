@@ -1,6 +1,6 @@
 import { Button, message } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import Login from "../authentication/Login";
 import Registration from "../authentication/Registeration";
 import { login, register } from "../api/api";
@@ -13,9 +13,8 @@ const AuthPage = () => {
     password: "",
   });
 
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
-  // Handle form changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -24,25 +23,23 @@ const AuthPage = () => {
     });
   };
 
-  // Handle login
   const handleLogin = async () => {
     const { email, password } = formData;
     try {
-      const response = await login(email, password);
+      await login(email, password);
       message.success("Login successful!");
-      navigate("/home"); // Redirect to Home page
+      navigate("/home");
     } catch (error) {
       message.error(error.message || "Login failed!");
     }
   };
 
-  // Handle registration
   const handleRegistration = async () => {
     const { name, email, password } = formData;
     try {
-      const response = await register(name, email, password);
+      await register(name, email, password);
       message.success("Registration successful!");
-      navigate("/home"); // Redirect to Home page
+      navigate("/home");
     } catch (error) {
       message.error(error.message || "Registration failed!");
     }
@@ -60,7 +57,6 @@ const AuthPage = () => {
           />
         )}
         <div className="flex gap-10 mt-4">
-          {/* SignIn Button handles login */}
           <Button
             style={{ width: "140px", borderRadius: "40px" }}
             onClick={isLogin ? handleLogin : () => setIsLogin(true)}
@@ -68,7 +64,7 @@ const AuthPage = () => {
           >
             SignIn
           </Button>
-          {/* SignUp Button handles registration */}
+
           <Button
             style={{ width: "140px", borderRadius: "40px" }}
             onClick={!isLogin ? handleRegistration : () => setIsLogin(false)}
