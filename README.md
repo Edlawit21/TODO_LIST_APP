@@ -26,4 +26,5 @@ Clone the Repository
    ** and also it will direct you to the home page when register but logout and
      again login so that your token be saved and you can add your tasks 
      
-
+**it has some features also that are going to be added but most of it are finished 
+and it needs some improvement in the responsiveness too.
